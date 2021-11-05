@@ -132,7 +132,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     ("y" ivy-yank-action "yank")))
     :diminish ivy-mode
   )
-
 (use-package counsel
   :ensure t
   :bind
@@ -146,6 +145,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     ("M-x"     . counsel-M-x)
     ("C-x C-f" . counsel-find-file)
   )
+(use-package ivy-prescient
+  :after counsel
+  :config
+  (ivy-prescient-mode 1))
 
 (use-package swiper
   :ensure t
@@ -564,6 +567,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(global-font-lock-mode t)
  '(package-selected-packages
    (quote
-    (flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode undo-tree fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org)))
+    (counsel-projectile flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode undo-tree fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org)))
  '(python-shell-interpreter "python3")
  '(show-paren-mode t))
