@@ -472,6 +472,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (evil-org-agenda-set-keys)
   :diminish)
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; saveplace
 ;; When you visit a file, point goes to the last place where it
@@ -560,10 +561,13 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(debug-on-error t)
  '(display-time-mode t)
  '(evil-undo-system (quote undo-tree))
+ '(fill-column 80)
  '(fzf/executable "/usr/local/bin/fzf")
  '(global-font-lock-mode t)
+ '(magit-log-margin (quote (t "%Y-%m-%d %H:%M " magit-log-margin-width t 18)))
+ '(org-agenda-files (quote ("~/Desktop/research/kaufman/sensing/notes.org")))
  '(package-selected-packages
    (quote
-    (flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode undo-tree fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org)))
+    (rg flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode undo-tree fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org)))
  '(python-shell-interpreter "python3")
  '(show-paren-mode t))
