@@ -574,3 +574,4 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     (rg counsel-projectile flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode undo-tree fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org)))
  '(python-shell-interpreter "python3")
  '(show-paren-mode t))
+(put 'narrow-to-region 'disabled nil)
