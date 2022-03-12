@@ -395,6 +395,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; which-key
 
 (use-package which-key
+  :ensure t
   :init
     (which-key-setup-minibuffer)
     (which-key-mode)
@@ -417,6 +418,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; counsel-projectile
 (use-package counsel-projectile
+  :ensure t
   :after projectile
   :init
     (counsel-projectile-mode)
@@ -453,6 +455,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
   (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
   )
+
+;;; Forge
+(use-package forge
+  :after magit)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org
@@ -565,8 +571,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(evil-undo-system (quote undo-tree))
  '(fzf/executable "/usr/local/bin/fzf")
  '(global-font-lock-mode t)
+ '(org-agenda-files (quote ("~/Desktop/scratch/todo/todo.org")))
  '(package-selected-packages
    (quote
-    (counsel-projectile flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode undo-tree fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org)))
+    (csv-mode forge ghub counsel-projectile flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode undo-tree fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org)))
  '(python-shell-interpreter "python3")
  '(show-paren-mode t))
+(put 'narrow-to-region 'disabled nil)
