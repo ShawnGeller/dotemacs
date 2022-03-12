@@ -481,6 +481,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (evil-org-agenda-set-keys)
   :diminish)
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; saveplace
 ;; When you visit a file, point goes to the last place where it
@@ -569,6 +570,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(debug-on-error t)
  '(display-time-mode t)
  '(evil-undo-system (quote undo-tree))
+ '(fill-column 80)
  '(fzf/executable "/usr/local/bin/fzf")
  '(global-font-lock-mode t)
  '(org-agenda-files (quote ("~/Desktop/scratch/todo/todo.org")))
