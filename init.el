@@ -1,31 +1,38 @@
 ;; Shawn's init.el. First load package libraries
 
 (require 'package)
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                    (not (gnutls-available-p))))
-       (proto (if no-ssl "http" "https")))
-  (when no-ssl
-    (warn "\
-Your version of Emacs does not support SSL connections,
-which is unsafe because it allows man-in-the-middle attacks.
-There are two things you can do about this warning:
-1. Install an Emacs version that does support SSL and be safe.
-2. Remove this warning from your init file so you won't see it again."))
-  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
-  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
-  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
-  (when (< emacs-major-version 24)
-    ;; For important compatibility libraries like cl-lib
-    (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+;; and `package-pinned-packages`. Most users will not need or want to do this.
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
-(setq inhibit-startup-message t)
-(set-scroll-bar-mode nil)
+;; (require 'package)
+;; (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+;;                     (not (gnutls-available-p))))
+;;        (proto (if no-ssl "http" "https")))
+;;   (when no-ssl
+;;     (warn "\
+;; Your version of Emacs does not support SSL connections,
+;; which is unsafe because it allows man-in-the-middle attacks.
+;; There are two things you can do about this warning:
+;; 1. Install an Emacs version that does support SSL and be safe.
+;; 2. Remove this warning from your init file so you won't see it again."))
+;;   ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+;;   (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+;;   ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+;;   (when (< emacs-major-version 24)
+;;     ;; For important compatibility libraries like cl-lib
+;;     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
+;; (package-initialize)
+;; 
+;; (setq inhibit-startup-message t)
+;; (set-scroll-bar-mode nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; use-package
 (eval-when-compile
-  (add-to-list 'load-path "~/.emacs.d/elpa/use-package-2.4")
+  (add-to-list 'load-path "~/.emacs.d/use-package-2.4.5")
   (require 'use-package))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -69,11 +76,14 @@ There are two things you can do about this warning:
         (define-key evil-outer-text-objects-map ,key #',outer-name))))
   )
 
-(require 'general)
-(general-create-definer my-leader-def
-  ;; :prefix my-leader
-  :prefix "\\")
-(general-evil-setup)
+(use-package general
+    :ensure t
+    :config
+      (general-create-definer my-leader-def
+        ;; :prefix my-leader
+        :prefix "\\")
+      (general-evil-setup)
+  )
 
 ;; esc quits
 (defun minibuffer-keyboard-quit ()
@@ -565,18 +575,16 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(TeX-electric-sub-and-superscript nil)
  '(coffee-tab-width 2)
  '(custom-safe-themes
-   (quote
-    ("93f9654f91d31e9a9ec6ea2fcffcfcab38353a9588673f2b750e591f704cd633" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default)))
+   '("93f9654f91d31e9a9ec6ea2fcffcfcab38353a9588673f2b750e591f704cd633" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default))
  '(debug-on-error t)
  '(display-time-mode t)
- '(evil-undo-system (quote undo-tree))
+ '(evil-undo-system 'undo-tree)
  '(fill-column 80)
  '(fzf/executable "/usr/local/bin/fzf")
  '(global-font-lock-mode t)
- '(org-agenda-files (quote ("~/Desktop/scratch/todo/todo.org")))
+ '(org-agenda-files '("~/Desktop/scratch/todo/todo.org"))
  '(package-selected-packages
-   (quote
-    (csv-mode forge ghub counsel-projectile flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode undo-tree fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org)))
+   '(julia-mode undo-tree magit company yasnippet powerline-evil csv-mode forge ghub counsel-projectile flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org))
  '(python-shell-interpreter "python3")
  '(show-paren-mode t))
 (put 'narrow-to-region 'disabled nil)
