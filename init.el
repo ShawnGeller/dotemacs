@@ -35,6 +35,9 @@
   (add-to-list 'load-path "~/.emacs.d/use-package-2.4.5")
   (require 'use-package))
 
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; diminish
 (use-package diminish)
@@ -561,7 +564,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; My machine specific
-(find-file "~/Desktop/scratch/todo/todo.org")
+;; (find-file "~/Desktop/scratch/todo/todo.org")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom
 (custom-set-faces
@@ -589,9 +592,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(fill-column 80)
  '(fzf/executable "/usr/local/bin/fzf")
  '(global-font-lock-mode t)
- '(org-agenda-files '("~/Desktop/scratch/todo/todo.org"))
  '(package-selected-packages
-   '(julia-mode undo-tree magit company yasnippet powerline-evil csv-mode forge ghub counsel-projectile flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org))
+   '(preview csv-mode forge ghub counsel-projectile flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode undo-tree fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org))
  '(python-shell-interpreter "python3")
  '(show-paren-mode t))
 (put 'narrow-to-region 'disabled nil)
