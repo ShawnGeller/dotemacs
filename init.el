@@ -2,32 +2,7 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
-;; and `package-pinned-packages`. Most users will not need or want to do this.
-;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
-
-;; (require 'package)
-;; (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-;;                     (not (gnutls-available-p))))
-;;        (proto (if no-ssl "http" "https")))
-;;   (when no-ssl
-;;     (warn "\
-;; Your version of Emacs does not support SSL connections,
-;; which is unsafe because it allows man-in-the-middle attacks.
-;; There are two things you can do about this warning:
-;; 1. Install an Emacs version that does support SSL and be safe.
-;; 2. Remove this warning from your init file so you won't see it again."))
-;;   ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
-;;   (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
-;;   ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
-;;   (when (< emacs-major-version 24)
-;;     ;; For important compatibility libraries like cl-lib
-;;     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
-;; (package-initialize)
-;; 
-;; (setq inhibit-startup-message t)
-;; (set-scroll-bar-mode nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; use-package
@@ -159,10 +134,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     ("M-x"     . counsel-M-x)
     ("C-x C-f" . counsel-find-file)
   )
-;; (use-package ivy-prescient
-;;   :after counsel
-;;   :config
-;;   (ivy-prescient-mode 1))
 
 (use-package swiper
   :ensure t
@@ -179,14 +150,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   :diminish company-mode
   )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; column enforce
-;; (use-package column-enforce-mode :ensure t
-;;  :hook (after-init . global-column-enforce-mode)
-;;  :config (setq column-enforce-column 100)
-;;  :diminish column-enforce-mode
-;; )
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; material theme
@@ -195,221 +158,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   :config
   (load-theme 'material t)
   )
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; flycheck
-
-;; (use-package flycheck
-;;   :config
-;;     (setq flycheck-check-syntax-automatically '(save mode-enable))
-;;     (global-flycheck-mode +1)
-;;   :diminish flycheck-mode
-;;   )
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; auctex
-;; (use-package tex-site                   ; auctex
-;;   :load-path "site-lisp/auctex/"
-;;   :defines (latex-help-cmd-alist latex-help-file)
-;;   :mode ("\\.tex\\'" . TeX-latex-mode)
-;;   :hook (LaTeX-mode . LaTeX-math-mode)
-;;   (LaTeX-mode . (lambda ()
-;;                   (define-and-bind-quoted-text-object "dollar" "$" "\\$" "\\$")
-;;                   (define-and-bind-quoted-text-object "lr-pair" "\\" "\\\\left"
-;;                     "\\\\right")
-;;                   (define-and-bind-quoted-text-object "escaped-braces" "|" "\\\\{" "\\\\}")
-;;                   ))
-;;   :init
-;;   (setq reftex-plug-into-AUCTeX t)
-;;   (setenv "PATH" (concat "/Library/TeX/texbin:"
-;;                          (getenv "PATH")))
-;;   (add-to-list 'exec-path "/Library/TeX/texbin")
-;;   :config
-;;   (setq font-latex-fontify-script nil)
-;;   (defun latex-help-get-cmd-alist ()    ;corrected version:
-;;     "Scoop up the commands in the index of the latex info manual.
-;;    The values are saved in `latex-help-cmd-alist' for speed."
-;;     ;; mm, does it contain any cached entries
-;;     (if (not (assoc "\\begin" latex-help-cmd-alist))
-;;         (save-window-excursion
-;;           (setq latex-help-cmd-alist nil)
-;;           (Info-goto-node (concat latex-help-file "Command Index"))
-;;           (goto-char (point-max))
-;;           (while (re-search-backward "^\\* \\(.+\\): *\\(.+\\)\\." nil t)
-;;             (let ((key (buffer-substring (match-beginning 1) (match-end 1)))
-;;                   (value (buffer-substring (match-beginning 2)
-;;                                            (match-end 2))))
-;;               (add-to-list 'latex-help-cmd-alist (cons key value))))))
-;;     latex-help-cmd-alist)
-
-;; (use-package latex
-;; :defer t
-;; :config
-;; (use-package preview)
-;; (add-hook 'LaTeX-mode-hook 'reftex-mode)
-;;  ))
-
-
-;; (use-package auctex
-;;   :mode ("\\.tex\\'" . TeX-latex-mode)
-;;   :hook (LaTeX-mode . LaTeX-math-mode)
-;;   :config
-;;   (setq TeX-electric-sub-and-superscript t)
-;;   (setq TeX-electric-math t)
-;;   (defun latex-help-get-cmd-alist ()    ;corrected version:
-;;     "Scoop up the commands in the index of the latex info manual.
-;;    The values are saved in `latex-help-cmd-alist' for speed."
-;;     ;; mm, does it contain any cached entries
-;;     (if (not (assoc "\\begin" latex-help-cmd-alist))
-;;         (save-window-excursion
-;;           (setq latex-help-cmd-alist nil)
-;;           (Info-goto-node (concat latex-help-file "Command Index"))
-;;           (goto-char (point-max))
-;;           (while (re-search-backward "^\\* \\(.+\\): *\\(.+\\)\\." nil t)
-;;             (let ((key (buffer-substring (match-beginning 1) (match-end 1)))
-;;                   (value (buffer-substring (match-beginning 2)
-;;                                            (match-end 2))))
-;;               (add-to-list 'latex-help-cmd-alist (cons key value))))))
-;;     latex-help-cmd-alist)
-
-;;   (add-hook 'TeX-after-compilation-finished-functions
-;;             #'TeX-revert-document-buffer))
-
-;; (use-package company-auctex
-;;   :after (company latex))
-
-;; (use-package latex
-;;   :after auctex
-;;   :config
-;;   (require 'preview)
-;;   (load (emacs-path "site-lisp/auctex/style/minted"))
-;;   (info-lookup-add-help :mode 'LaTeX-mode
-;;                         :regexp ".*"
-;;                         :parse-rule "\\\\?[a-zA-Z]+\\|\\\\[^a-zA-Z]"
-;;                         :doc-spec '(("(latex2e)Concept Index")
-;;                                     ("(latex2e)Command Index")))
-;;   )
-
-;; (add-to-list 'ispell-local-dictionary-alist '("english-hunspell"
-;;                                               "[[:alpha:]]"
-;;                                               "[^[:alpha:]]"
-;;                                               "[']"
-;;                                               t
-;;                                               ("-d" "en_US")
-;;                                               nil
-;;                                               iso-8859-1))
-
-;; (setq ispell-program-name "hunspell"
-;;       ispell-dictionary "english-hunspell")
-
-;;(use-package reftex
-;;  :after auctex
-;;  :hook (LaTeX-mode . reftex-mode))
-;;
-;;(use-package yasnippet
-;;  :demand t
-;;  :diminish yas-minor-mode
-;;  :bind (:map yas-keymap
-;;              ("C-i" . yas-next-field-or-maybe-expand))
-;;  :config
-;;  (yas-global-mode 1))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; pyvenv
-;; ;; (use-package pyvenv-mode :hook (python-mode))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; julia
-
-;;(use-package julia-mode :hook (juila-mode))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; matlab
-;;(use-package matlab
-;;  :ensure matlab-mode
-;;  :config
-;;  (add-to-list
-;;   'auto-mode-alist
-;;   '("\\.m\\'" . matlab-mode))
-;;  (setq matlab-indent-function t)
-;;  (setq matlab-shell-command "matlab"))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; web mode
-;; (use-package web-mode
-;;   :config
-;;   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-;;   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-;;   (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-;;   (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-;;   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-;;   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-;;   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-;;   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-;;   (setq web-mode-engines-alist '(("django" . "\\.html\\'")))
-;;   (general-nmap :prefix "\\ w" :prefix-map 'web-mode-map)
-;;   )
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; lsp
-;; (require 'lsp-java)
-;; (use-package lsp-mode
-;;   :config
-;;   (setq lsp-response-timeout 2)
-;;   (setq lsp-eldoc-enable-hover nil)
-;;   (setq lsp-eldoc-render-all nil)
-;;   (setq
-;;     lsp-signature-auto-activate t
-;;     lsp-signature-doc-lines 1)
-;;   (setq lsp-gopls-hover-kind "NoDocumentation")
-;;   (setq lsp-rust-server 'rls)
-;;   (general-nmap :prefix "\\ l" :prefix-map 'lsp-command-map)
-;;   :commands (lsp lsp-deferred)
-;;   :hook (python-mode . lsp-deferred)
-;;         (ruby-mode . lsp-deferred)
-;;         (html-mode . lsp-deferred)
-;;         (shell-mode . lsp-deferred)
-;;         (julia-mode . lsp-deferred)
-;;         (java-mode . lsp-deferred)
-;;         (lsp-mode . lsp-enable-which-key-integration)
-;;         (rust-mode . lsp-deferred)
-;;         )
-;; (use-package company-lsp :commands company-lsp)
-;; (use-package lsp-ivy
-;;   :requires (lsp ivy)
-;;   :commands lsp-ivy-workspace-symbol
-;;   :config
-;;     (define-key lsp-mode-map [remap xref-find-apropos] #'lsp-ivy-workspace-symbol)
-;;   )
-
-;; (use-package ccls
-;;   :hook ((c-mode c++-mode objc-mode cuda-mode) .
-;;          (lambda () (require 'ccls) (lsp))))
-;; (setq ccls-executable "/opt/ccls/Release/ccls")
-;; (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t)))
-
-;; (use-package ivy-xref
-;;   :ensure t
-;;   :init
-;;   ;; xref initialization is different in Emacs 27 - there are two different
-;;   ;; variables which can be set rather than just one
-;;   (when (>= emacs-major-version 27)
-;;     (setq xref-show-definitions-function #'ivy-xref-show-defs))
-;;   ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
-;;   ;; commands other than xref-find-definitions (e.g. project-find-regexp)
-;;   ;; as well
-;;   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
-
-;; (use-package lsp-python-ms
-;;   :ensure t
-;;   :requires lsp
-;;   :init (setq lsp-python-ms-auto-install-server t)
-;;   :config (setq lsp-python-ms-executable
-;;       "/opt/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
-;;   :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp))))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; which-key
@@ -425,32 +173,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   :diminish
   )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; projectile
-;;(use-package projectile
-;;  :init
-;;    (projectile-mode +1)
-;;    ;; (evil-leader/set-key "p" 'projectile-command-map)
-;;  :config
-;;    (general-nmap :prefix "\\ p" :prefix-map 'projectile-command-map)
-;;  )
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; counsel-projectile
-;;(use-package counsel-projectile
-;;  :ensure t
-;;  :after projectile
-;;  :init
-;;    (counsel-projectile-mode)
-;;  :diminish
-;;  )
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; parens
-;;(use-package paredit
-;;  :init
-;;    (show-paren-mode 1)
-;;  )
 (use-package rainbow-delimiters)
 
 ;; Highlights matching parenthesis
@@ -482,24 +204,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; saveplace
-;; When you visit a file, point goes to the last place where it
-;; was when you previously visited the same file.
-;; http://www.emacswiki.org/emacs/SavePlace
-;; (require 'saveplace)
-;; (setq-default save-place t)
-;; ;; keep track of saved places in ~/.emacs.d/places
-;; (setq save-place-file (concat user-emacs-directory "places"))
-;; 
-;; ;; Emacs can automatically create backup files. This tells Emacs to
-;; ;; put all backups in ~/.emacs.d/backups. More info:
-;; ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html
-;; (setq backup-directory-alist `(("." . ,(concat user-emacs-directory
-;;                                                "backups"))))
-;; (setq auto-save-default nil)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Misc.
 ;; comments
 (global-set-key (kbd "C-;") 'comment-line)
@@ -524,26 +228,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; No need for ~ files when editing
 (setq create-lockfiles nil)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; For editing lisps
-;; Automatically load paredit when editing a lisp file
-;; (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-;; (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-;; (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-;; (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-;; (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-;; 
-;; ;; eldoc-mode shows documentation in the minibuffer when writing code
-;; (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-;; (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-;; 
-;; (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; My machine specific
-;; (find-file "~/Desktop/scratch/todo/todo.org")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom
 (custom-set-faces
