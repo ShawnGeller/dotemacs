@@ -159,10 +159,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     ("M-x"     . counsel-M-x)
     ("C-x C-f" . counsel-find-file)
   )
-(use-package ivy-prescient
-  :after counsel
-  :config
-  (ivy-prescient-mode 1))
+;; (use-package ivy-prescient
+;;   :after counsel
+;;   :config
+;;   (ivy-prescient-mode 1))
 
 (use-package swiper
   :ensure t
@@ -199,56 +199,56 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; flycheck
 
-(use-package flycheck
-  :config
-    (setq flycheck-check-syntax-automatically '(save mode-enable))
-    (global-flycheck-mode +1)
-  :diminish flycheck-mode
-  )
+;; (use-package flycheck
+;;   :config
+;;     (setq flycheck-check-syntax-automatically '(save mode-enable))
+;;     (global-flycheck-mode +1)
+;;   :diminish flycheck-mode
+;;   )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; auctex
-(use-package tex-site                   ; auctex
-  :load-path "site-lisp/auctex/"
-  :defines (latex-help-cmd-alist latex-help-file)
-  :mode ("\\.tex\\'" . TeX-latex-mode)
-  :hook (LaTeX-mode . LaTeX-math-mode)
-  (LaTeX-mode . (lambda ()
-                  (define-and-bind-quoted-text-object "dollar" "$" "\\$" "\\$")
-                  (define-and-bind-quoted-text-object "lr-pair" "\\" "\\\\left"
-                    "\\\\right")
-                  (define-and-bind-quoted-text-object "escaped-braces" "|" "\\\\{" "\\\\}")
-                  ))
-  :init
-  (setq reftex-plug-into-AUCTeX t)
-  (setenv "PATH" (concat "/Library/TeX/texbin:"
-                         (getenv "PATH")))
-  (add-to-list 'exec-path "/Library/TeX/texbin")
-  :config
-  (setq font-latex-fontify-script nil)
-  (defun latex-help-get-cmd-alist ()    ;corrected version:
-    "Scoop up the commands in the index of the latex info manual.
-   The values are saved in `latex-help-cmd-alist' for speed."
-    ;; mm, does it contain any cached entries
-    (if (not (assoc "\\begin" latex-help-cmd-alist))
-        (save-window-excursion
-          (setq latex-help-cmd-alist nil)
-          (Info-goto-node (concat latex-help-file "Command Index"))
-          (goto-char (point-max))
-          (while (re-search-backward "^\\* \\(.+\\): *\\(.+\\)\\." nil t)
-            (let ((key (buffer-substring (match-beginning 1) (match-end 1)))
-                  (value (buffer-substring (match-beginning 2)
-                                           (match-end 2))))
-              (add-to-list 'latex-help-cmd-alist (cons key value))))))
-    latex-help-cmd-alist)
+;; (use-package tex-site                   ; auctex
+;;   :load-path "site-lisp/auctex/"
+;;   :defines (latex-help-cmd-alist latex-help-file)
+;;   :mode ("\\.tex\\'" . TeX-latex-mode)
+;;   :hook (LaTeX-mode . LaTeX-math-mode)
+;;   (LaTeX-mode . (lambda ()
+;;                   (define-and-bind-quoted-text-object "dollar" "$" "\\$" "\\$")
+;;                   (define-and-bind-quoted-text-object "lr-pair" "\\" "\\\\left"
+;;                     "\\\\right")
+;;                   (define-and-bind-quoted-text-object "escaped-braces" "|" "\\\\{" "\\\\}")
+;;                   ))
+;;   :init
+;;   (setq reftex-plug-into-AUCTeX t)
+;;   (setenv "PATH" (concat "/Library/TeX/texbin:"
+;;                          (getenv "PATH")))
+;;   (add-to-list 'exec-path "/Library/TeX/texbin")
+;;   :config
+;;   (setq font-latex-fontify-script nil)
+;;   (defun latex-help-get-cmd-alist ()    ;corrected version:
+;;     "Scoop up the commands in the index of the latex info manual.
+;;    The values are saved in `latex-help-cmd-alist' for speed."
+;;     ;; mm, does it contain any cached entries
+;;     (if (not (assoc "\\begin" latex-help-cmd-alist))
+;;         (save-window-excursion
+;;           (setq latex-help-cmd-alist nil)
+;;           (Info-goto-node (concat latex-help-file "Command Index"))
+;;           (goto-char (point-max))
+;;           (while (re-search-backward "^\\* \\(.+\\): *\\(.+\\)\\." nil t)
+;;             (let ((key (buffer-substring (match-beginning 1) (match-end 1)))
+;;                   (value (buffer-substring (match-beginning 2)
+;;                                            (match-end 2))))
+;;               (add-to-list 'latex-help-cmd-alist (cons key value))))))
+;;     latex-help-cmd-alist)
 
-  (use-package latex
-    :defer t
-    :config
-    (use-package preview)
-    (add-hook 'LaTeX-mode-hook 'reftex-mode)
-    ))
+;; (use-package latex
+;; :defer t
+;; :config
+;; (use-package preview)
+;; (add-hook 'LaTeX-mode-hook 'reftex-mode)
+;;  ))
 
 
 ;; (use-package auctex
@@ -276,8 +276,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;;   (add-hook 'TeX-after-compilation-finished-functions
 ;;             #'TeX-revert-document-buffer))
 
-(use-package company-auctex
-  :after (company latex))
+;; (use-package company-auctex
+;;   :after (company latex))
 
 ;; (use-package latex
 ;;   :after auctex
@@ -303,17 +303,17 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; (setq ispell-program-name "hunspell"
 ;;       ispell-dictionary "english-hunspell")
 
-(use-package reftex
-  :after auctex
-  :hook (LaTeX-mode . reftex-mode))
-
-(use-package yasnippet
-  :demand t
-  :diminish yas-minor-mode
-  :bind (:map yas-keymap
-              ("C-i" . yas-next-field-or-maybe-expand))
-  :config
-  (yas-global-mode 1))
+;;(use-package reftex
+;;  :after auctex
+;;  :hook (LaTeX-mode . reftex-mode))
+;;
+;;(use-package yasnippet
+;;  :demand t
+;;  :diminish yas-minor-mode
+;;  :bind (:map yas-keymap
+;;              ("C-i" . yas-next-field-or-maybe-expand))
+;;  :config
+;;  (yas-global-mode 1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; pyvenv
@@ -323,34 +323,34 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; julia
 
-(use-package julia-mode :hook (juila-mode))
+;;(use-package julia-mode :hook (juila-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; matlab
-(use-package matlab
-  :ensure matlab-mode
-  :config
-  (add-to-list
-   'auto-mode-alist
-   '("\\.m\\'" . matlab-mode))
-  (setq matlab-indent-function t)
-  (setq matlab-shell-command "matlab"))
+;;(use-package matlab
+;;  :ensure matlab-mode
+;;  :config
+;;  (add-to-list
+;;   'auto-mode-alist
+;;   '("\\.m\\'" . matlab-mode))
+;;  (setq matlab-indent-function t)
+;;  (setq matlab-shell-command "matlab"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; web mode
-(use-package web-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (setq web-mode-engines-alist '(("django" . "\\.html\\'")))
-  (general-nmap :prefix "\\ w" :prefix-map 'web-mode-map)
-  )
+;; (use-package web-mode
+;;   :config
+;;   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+;;   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+;;   (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+;;   (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+;;   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+;;   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+;;   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+;;   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+;;   (setq web-mode-engines-alist '(("django" . "\\.html\\'")))
+;;   (general-nmap :prefix "\\ w" :prefix-map 'web-mode-map)
+;;   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; lsp
@@ -425,32 +425,32 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   :diminish
   )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; projectile
-(use-package projectile
-  :init
-    (projectile-mode +1)
-    ;; (evil-leader/set-key "p" 'projectile-command-map)
-  :config
-    (general-nmap :prefix "\\ p" :prefix-map 'projectile-command-map)
-  )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; projectile
+;;(use-package projectile
+;;  :init
+;;    (projectile-mode +1)
+;;    ;; (evil-leader/set-key "p" 'projectile-command-map)
+;;  :config
+;;    (general-nmap :prefix "\\ p" :prefix-map 'projectile-command-map)
+;;  )
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; counsel-projectile
+;;(use-package counsel-projectile
+;;  :ensure t
+;;  :after projectile
+;;  :init
+;;    (counsel-projectile-mode)
+;;  :diminish
+;;  )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; counsel-projectile
-(use-package counsel-projectile
-  :ensure t
-  :after projectile
-  :init
-    (counsel-projectile-mode)
-  :diminish
-  )
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; parens
-(use-package paredit
-  :init
-    (show-paren-mode 1)
-  )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; parens
+;;(use-package paredit
+;;  :init
+;;    (show-paren-mode 1)
+;;  )
 (use-package rainbow-delimiters)
 
 ;; Highlights matching parenthesis
@@ -458,27 +458,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; Don't use hard tabs
 (setq-default indent-tabs-mode nil)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; neotree
-(use-package neotree
-  :config
-  (global-set-key [f8] 'neotree-toggle)
-  (setq neo-smart-open t)
-  (setq projectile-switch-project-action 'neotree-projectile-action)
-  (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-  (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-  (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-  (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-  (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
-  (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
-  (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
-  (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
-  (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
-  )
-
-;;; Forge
-(use-package forge
-  :after magit)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org
@@ -507,17 +486,17 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; When you visit a file, point goes to the last place where it
 ;; was when you previously visited the same file.
 ;; http://www.emacswiki.org/emacs/SavePlace
-(require 'saveplace)
-(setq-default save-place t)
-;; keep track of saved places in ~/.emacs.d/places
-(setq save-place-file (concat user-emacs-directory "places"))
-
-;; Emacs can automatically create backup files. This tells Emacs to
-;; put all backups in ~/.emacs.d/backups. More info:
-;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html
-(setq backup-directory-alist `(("." . ,(concat user-emacs-directory
-                                               "backups"))))
-(setq auto-save-default nil)
+;; (require 'saveplace)
+;; (setq-default save-place t)
+;; ;; keep track of saved places in ~/.emacs.d/places
+;; (setq save-place-file (concat user-emacs-directory "places"))
+;; 
+;; ;; Emacs can automatically create backup files. This tells Emacs to
+;; ;; put all backups in ~/.emacs.d/backups. More info:
+;; ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html
+;; (setq backup-directory-alist `(("." . ,(concat user-emacs-directory
+;;                                                "backups"))))
+;; (setq auto-save-default nil)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -548,17 +527,17 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; For editing lisps
 ;; Automatically load paredit when editing a lisp file
-(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-
-;; eldoc-mode shows documentation in the minibuffer when writing code
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+;; (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+;; (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+;; (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+;; (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+;; (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+;; 
+;; ;; eldoc-mode shows documentation in the minibuffer when writing code
+;; (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+;; (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+;; 
+;; (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 
 
@@ -581,7 +560,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(TeX-electric-math nil)
  '(TeX-electric-sub-and-superscript nil)
  '(coffee-tab-width 2)
  '(custom-safe-themes
@@ -590,10 +568,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(display-time-mode t)
  '(evil-undo-system 'undo-tree)
  '(fill-column 80)
- '(fzf/executable "/usr/local/bin/fzf")
  '(global-font-lock-mode t)
+ '(ispell-dictionary nil)
  '(package-selected-packages
-   '(preview csv-mode forge ghub counsel-projectile flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode undo-tree fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org))
- '(python-shell-interpreter "python3")
+   '(latex preview csv-mode forge ghub counsel-projectile flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode undo-tree fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org))
  '(show-paren-mode t))
 (put 'narrow-to-region 'disabled nil)
