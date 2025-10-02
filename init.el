@@ -21,6 +21,7 @@ There are two things you can do about this warning:
 
 (setq inhibit-startup-message t)
 (set-scroll-bar-mode nil)
+(setq global-visual-line-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; use-package
@@ -389,6 +390,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;;   :config (setq lsp-python-ms-executable
 ;;       "/opt/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
 ;;   :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp))))
+(use-package ivy-bibtex
+  :config (setq bibtex-completion-bibliography '("/home/shawn/bib/bib.bib"))
+  (setq bibtex-completion-library-path '("/home/shawn/bib/pdfs"))
+  (setq bibtex-completion-pdf-field "File"))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -559,19 +564,18 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(TeX-electric-sub-and-superscript nil)
  '(coffee-tab-width 2)
  '(custom-safe-themes
-   (quote
-    ("93f9654f91d31e9a9ec6ea2fcffcfcab38353a9588673f2b750e591f704cd633" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default)))
+   '("93f9654f91d31e9a9ec6ea2fcffcfcab38353a9588673f2b750e591f704cd633" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default))
  '(debug-on-error t)
  '(display-time-mode t)
- '(evil-undo-system (quote undo-tree))
+ '(evil-undo-system 'undo-tree)
  '(fill-column 80)
  '(fzf/executable "/usr/local/bin/fzf")
  '(global-font-lock-mode t)
- '(magit-log-margin (quote (t "%Y-%m-%d %H:%M " magit-log-margin-width t 18)))
- '(org-agenda-files (quote ("~/Desktop/research/kaufman/sensing/notes.org")))
+ '(ispell-dictionary nil)
+ '(magit-log-margin '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 18))
+ '(org-agenda-files '("~/Desktop/research/kaufman/sensing/notes.org"))
  '(package-selected-packages
-   (quote
-    (rg counsel-projectile flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode undo-tree fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org)))
+   '(ivy-bibtex rg counsel-projectile flycheck powerline rainbow-delimiters web-mode matlab-mode prescient ivy-prescient wolfram-mode undo-tree fireplace fzf lsp-java ivy-xref ccls racer rust-mode web-beautify auctex company-auctex general column-enforce-mode diminish neotree ob-diagrams company-lsp gnu-elpa-keyring-update counsel-tramp tagedit paredit f evil-visualstar evil-visual-replace evil-surround evil-org evil-magit calfw-org))
  '(python-shell-interpreter "python3")
  '(show-paren-mode t))
 (put 'narrow-to-region 'disabled nil)
